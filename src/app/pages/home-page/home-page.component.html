@@ -1,0 +1,21 @@
+<app-card>
+  <h1 class="text-4xl mb-2">{{ 'TITLE' | translate }}</h1>
+  <p>
+    NgProjectTemplate is a template for starting new Angular projects.
+  </p>
+</app-card>
+
+<app-card>
+  <h2 class="text-2xl mb-2">NgRx</h2>
+  <p>
+    State from NgRx store:
+  </p>
+  <pre class="border p-2 rounded my-2">{{ (state$ | async) | json }}</pre>
+  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="changeState()">Change
+    State</button>
+</app-card>
+
+<app-card>
+  <h2 class="text-2xl">Environment</h2>
+  Production environment: {{ envProduction }}
+</app-card>
