@@ -30,7 +30,7 @@ A page is characterized by:
 
 * its own module
 * a routing module
-* not declarated in the app module
+* not declared in the app module
 
 ### Create a new Page
 
