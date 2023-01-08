@@ -26,85 +26,26 @@ NgProjectTemplate is a template for starting new Angular projects.
 
 Pages are components in the folder `src/app/pages`. Each page has its own subfolder.
 
-A page is characterized by:
-
-* its own module
-* a routing module
-* not declared in the app module
-
 ### Create a new Page
 
-The next command generates the component for the page, 
+The following command generates the component for the page:
 
-```ng g c pages/NewPage --skip-import```
+```ng g c pages/NewPage```
 
-Create the file `new-page.module.ts` in the generated folder of the page (`/src/app/pages/new-page/new-page.module.ts`) and add the following content:
-
-```typescript
-import { NgModule } from '@angular/core';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { NewPageRoutingModule } from './new-page-routing.module';
-import { NewPageComponent } from './new-page.component';
-
-@NgModule({
-  declarations: [
-    NewPageComponent,
-  ],
-  imports: [
-    SharedModule,
-    NewPageRoutingModule,
-  ],
-  exports: [
-    NewPageComponent,
-  ],
-})
-export class NewPageModule { }
-```
-
-Create the file `new-page-routing.module.ts` in the folder of the component (`/src/app/pages/new-page/new-page-routing.module.ts`) with the follwing content:
-
-```typescript
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { NewPageComponent } from './new-page.component';
-
-const routes: Routes = [
-  {
-    path: '',
-    component: NewPageComponent
-  },
-];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class NewPageRoutingModule { }
-```
-
-Add the route to NewPage to the app routing module (`src/app/app-routing.module.ts`) between the paths `''` and `**`:
+Add the route to the new page component to the routes file (`src/app/routes.ts`):
 
 ```typescript
 ...
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () => import('./pages/home-page/home-page.module').then(m => m.HomePageModule),
-  },
+  ...
   {
     path: 'new-page',
-    loadChildren: () => import('./pages/new-page/new-page.module').then(m => m.NewPageModule),
+    loadComponent: () => import('./pages/new-page/new-page.component').then(m => m.NewPageComponent),
   },
-  {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full',
-  },
+  ...
 ];
 ...
 ```
-
 
 The page can now be reached at `http://localhost:4200/new-page`.
 
